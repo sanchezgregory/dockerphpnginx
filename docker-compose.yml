@@ -20,10 +20,12 @@ services:
             - php
             - mysqldb
     php:
-        image: nanoninja/php-fpm:${PHP_VERSION}
+        build: etc/php
+        container_name: php-fpm
         restart: always
         volumes:
             - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+            - "./etc/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini"
             - "./etc/php/www.conf:/usr/local/etc/php-fpm.d/www.conf"
             - "./www:/var/www/html"
     mysqldb:
