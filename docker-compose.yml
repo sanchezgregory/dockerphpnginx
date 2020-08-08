@@ -18,6 +18,8 @@ services:
         restart: always
         depends_on:
             - php
+        networks:
+            - my-network
     php:
         build: etc/php
         container_name: php-fpm
@@ -27,3 +29,10 @@ services:
             - ./etc/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
             - ./etc/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
             - ./www:/var/www/html
+        networks:
+            - my-network
+        environment:
+            MYSQL_URL: http://mysqldb:3000
+networks:
+    my-network:
+        external: true
