@@ -18,7 +18,6 @@ services:
         restart: always
         depends_on:
             - php
-            - mysqldb
     php:
         build: etc/php
         container_name: ${PHPFPM_NAME}
@@ -28,19 +27,3 @@ services:
             - ./etc/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
             - ./etc/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
             - ./www:/var/www/html
-    mysqldb:
-        build: etc/mysql
-        container_name: ${MYSQL_NAME}
-        command: --default-authentication-plugin=mysql_native_password
-        restart: always
-        env_file:
-            - ".env"
-        environment:
-            - MYSQL_DATABASE=${MYSQL_DATABASE}
-            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-        ports:
-            - ${PORT_MYSQL}:3306
-        volumes:
-            - ./data/db/mysql:/var/lib/mysql
