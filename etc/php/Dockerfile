@@ -1,5 +1,6 @@
 FROM php:7.1.14-fpm
 #FROM php:7.3.6-fpm
+
 RUN apt-get update && apt-get install -y \
     libzip-dev \
         libjpeg62-turbo-dev \
