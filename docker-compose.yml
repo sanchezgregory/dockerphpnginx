@@ -2,7 +2,7 @@ version: '3'
 services:
     web:
         build: etc/nginx
-        container_name: nginx
+        container_name: ${NGINX_NAME}
         restart: always
         ports:
         volumes:
@@ -22,7 +22,7 @@ services:
             - my-network
     php:
         build: etc/php
-        container_name: php-fpm
+        container_name: ${PHPFPM_NAME}
         restart: always
         volumes:
             - ./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini
