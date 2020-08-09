@@ -17,25 +17,32 @@
 
 #### 2. ` cp .env.example .env `
 
- 3.- Seguir las instrucciones del .env
+#### 3. Debes elegir con cual versión de PHP vas a usar (Descomente la linea que desea utilizar)
+#### 3.1  *para prestashop 1.6 utilizar FROM php:7.1.14-fpm*
+#### 3.2  *para prestashop 1.7 utilizar FROM php:7.3.6-fpm*
 
- 3.- a. docker-compose up --build  (levanta el docker y lo construye)  -> se ven los logs siempre
-     b. docker-compose up -d build (levanta el docker lo construye y lo deja en segundo plano) -> no se ven los logs
+#### 4.1  docker-compose up --build  levanta el docker y lo construye **se ven los logs siempre**
+#### 4.2  docker-compose up --build -d levanta el docker lo construye **lo deja en segundo plano**
  
-  4.- Hasta aqui deberá comprobar que todo esté funcionando desde el explorador:
- 	
- 	https://localhost:"PORT_HTTPS"  ==> Mostrará error 400 Bad Request (obvio porque aun no tenemos el proyecto en la carpeta www)
- 	Si no utilizó el parametro -d podrá ver los logs de acceso al docker mostrando algo como:
+#### 5. Copie el archivo index.php ubicado en etc/php/index.php a la carpeta www creada por el docker, para comprobar que la conexión entre el servicio WEB y el MysqlDB
+#### 5.1. `sudo chown -R $USER. www/` 
 
- 	[ 172.18.0.1 - - [23/Nov/2018:18:11:06 +0000] "GET / HTTP/1.1" 400 673 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36" ]
+#### 5.2. `cp etc/php/index.php www/`
 
-  5.- Ahora deberá comprobar que tiene acceso a la BD. Desde mysql-workbench (o cualquiera de su preferencia)
+#### 6. https://localhost:"PORT_HTTPS"
 
-  	Siguiendo los pasos para el docker-compose de Mysql
+#### 6.1 Si observa el mensaje: *Access denied for user 'root'@'172.22.0.3' (using password: YES)*
+##### Falta ejecutar el comando `docker exec -it mysqldb bash  /etc/user.sh`
+##### Asegurese de ver el mensaje: *Connected successfully - OK*
+##### Para finalizar ejecute: `rm www/index.php`
 
-  6.- Clone el proyecto completo ya sea individualmente core, overrides, theme, modules, etc  o  simplemente ejecute el rsync.sh (elija la opcion 6.1 o 6.2) 
+### Desde ahora ya puede migrar su proyecto a la carpeta www/
 
-	6.1 (usando rsync.sh  "proyecto completo con imagenes")
+##### 7. Ahora deberá comprobar que tiene acceso a la BD. Desde mysql-workbench (o cualquiera de su preferencia, siguiendo los pasos del readme.md del docker mysql)
+
+##### 8. Clone el proyecto completo ya sea individualmente core, overrides, theme, modules, etc  o  simplemente ejecute el rsync.sh (elija la opcion 6.1 o 6.2) 
+
+##### 8.1 usando rsync.sh  "proyecto completo con imagenes"
 
 		Editar el rsync.sh  y agregar la ubicacion del proyecto, este traerá todo el proyecto hacia la carpeta www. Por ejemplo
    			/home/$USER/prestaNginx/    "dentro de la carpeta donde se clonó el docker -> prestaNginx  se creará la carpeta www"
@@ -78,7 +85,7 @@
 			git branch -D "NombreBranch"
 			
 
-	6.2 (Solo si no se usa el paso 6.1) baja modulo a modulo
+##### 8.2 Solo si no se usa el paso 8.1 baja modulo a modulo
 		
 		dentro de la carpeta del proyecto ("www/")
 		1. git clone git@gitlab.com:apernet/icbcstore-core.git .
@@ -92,79 +99,50 @@
 		9. git clone git@gitlab.com:apernet/icbcstore-blocktopmenu.git modules/blocktopmenu
 		10. git clone git@gitlab.com:apernet/presta-pointspayment.git modules/pointspayment
 
-*nota: hacer los pasos siguientes desde /www
-   7.- Eliminar el directorio cache/ (rm -rf cache) y crearlo (mkdir cache);  con todos (sin -r) los permisos (chmod 777 cache)
-   8.- Eliminar el directorio themes/icbcstore/cache/ (rm -rf themes/icbcstore/cache/) y crearlo (mkdir themes/icbcstore/cache);  con todos (sin -r) los permisos (chmod 777 themes/icbcstore/cache)
-   9.- Eliminar el directorio log/ y crearlo (mkdir log);  con todos (sin -r) los permisos (chmod 777 log)
-   9.- Crear el archivo settings.inc.php en base al template (cp config/settings_template.inc.php config/settings.inc.php)
-     9.1 - define('_DB_SERVER_', 'mysqldb');
+#### 9. **nota: hacer los pasos siguientes desde /www**
+
+##### 10. Eliminar el directorio cache/ (rm -rf cache) y crearlo (mkdir cache);  con todos (sin -r) los permisos (chmod 777 cache)
+
+##### 11. Eliminar el directorio themes/icbcstore/cache/ (rm -rf themes/icbcstore/cache/) y crearlo (mkdir themes/icbcstore/cache);  con todos (sin -r) los permisos (chmod 777 themes/icbcstore/cache)
+
+##### 12. Eliminar el directorio log/ y crearlo (mkdir log);  con todos (sin -r) los permisos (chmod 777 log)
+
+##### 13. Crear el archivo settings.inc.php en base al template (cp config/settings_template.inc.php config/settings.inc.php)
+
+##### 13.1 `define('_DB_SERVER_', 'mysqldb');
            define('_DB_NAME_', '<db_name>');
            define('_DB_USER_', 'root');
-           define('_DB_PASSWD_', 'root');
-   10.- Crear el .htaccess  (touch .htaccess,  chmod 777 .htaccess)
+           define('_DB_PASSWD_', 'root');`
 
-   11.- Importar la base de datos
+##### 14. Crear el .htaccess  (touch .htaccess,  chmod 777 .htaccess)
+
+##### 15. Importar la base de datos
 	
-	Una vez importada la BD se deben editar:
+##### 16. Una vez importada la BD se deben editar:
 
-		11.1 Para empezar con prestashop:  http (sin ssl) = "No activado"
-		
-		Tabla = PS_CONFIGURATION 
-			Campo= [ PS_SHOP_DOMAIN] = "localhost:9000" 
-			Campo= [ PS_SHOP_DOMAIN_SSL] = "localhost:9000"
-			Campo= [ PS_SSL_ENABLED] = 0 
+===========================================================================
+##### 16.1 Para empezar con prestashop:  http (sin ssl) = "No activado"
+###### Tabla = PS_CONFIGURATION 
+			Campo= [ PS_SHOP_DOMAIN] = localhost:"PORT_HTTP"
+			Campo= [ PS_SHOP_DOMAIN_SSL] = localhost:"PORT_HTTP"
+			Campo= [ PS_SSL_ENABLED] = 0
 	
-		Tabla = PS_SHOP_URL 
-			Campo = [PS_SHOP_DOMAIN] = "localhost:9000"
-
-
-		11.2 Para empezar con prestashop:  https (ssl)
+###### Tabla = PS_SHOP_URL 
+			Campo = [PS_SHOP_DOMAIN] = localhost:"PORT_HTTP"
+============================================================================
+##### 16.2 Para empezar con prestashop:  https (con ssl) = "Activado"
 		
-		Tabla = PS_CONFIGURATION 
-			Campo= [ PS_SHOP_DOMAIN] = "localhost:3000" 
-			Campo= [ PS_SHOP_DOMAIN_SSL] = "localhost:3000"
+###### Tabla = PS_CONFIGURATION 
+			Campo= [ PS_SHOP_DOMAIN] = localhost:"PORT_HTTPS"
+			Campo= [ PS_SHOP_DOMAIN_SSL] = localhost:"PORT_HTTPS"
 			Campo= [ PS_SSL_ENABLED] = 1 
 	
-		Tabla = PS_SHOP_URL 
-			Campo = [PS_SHOP_DOMAIN] = "localhost:3000"
+###### Tabla = PS_SHOP_URL 
+			Campo = [PS_SHOP_DOMAIN] = localhost:"PORT_HTTPS"
+============================================================================
 
+###### En la tabla ps_configuration el valor RECAPTCHA_API_KEY - Si existe hace la validacion. Para deshabilitar la funcion de recaptcha, se cambia su nombre ej: RECAPTCHA_API_KEY_old
 
-		En la tabla ps_configuration el valor RECAPTCHA_API_KEY - Si existe hace la validacion. Para deshabilitar la funcion de 
-		recaptcha, se cambia su nombre ej: RECAPTCHA_API_KEY_old
+###### QUITAR CDN DE IMAGENES,  en backoffice.
 
-========================================================================
-QUITAR CDN DE IMAGENES,  en backoffice.
-
-Parametros Avanzados > Rendimiento > Servidor multimedia nº 1 > vacío
-=======================================================================
-
-   PARA USAR PUNTOS
-
-	Dependiendo del dump de la base de datos.
-        ALTER TABLE ps_pointspayment_detail_transactions add COLUMN  updated_redeem varchar(1) default 0 after reference;
-
-	Configurar el modulo para ser usado en QA
-	
-	Modulos y servicios > Pointspayment > Auth/PO > OAUTH DOMAIN Prod: vacio / Test: https://oauth-club.aper.net
-					    	      > PARTNER DOMAIN: Prod: vacio / Test: https://partner-club.aper.net
-						      > Ambiente actual: Test (ambos selects)
-
-=====================================================================
-
-  PARA USAR DECIDIR
-	
-	Configurar a los proveedores con las siguientes credenciales:
-
-	Modulos y servicios > Decidir 2.0 > PROVEEDORES
-		
-		ID_Site: 	9999991
-		Private Key: 	1b19bb47507c4a259ca22c12f78e881f
-		Public Key:	96e7f0d36a0648fb9a8dcb50ac06d260
-		Descripcion:    Nombre del proveedor
-		Nro Est. Visa:	depende del proveedor. Ejm (Datasoft: 15284011, Samsung: 15284011)
-
-
--
-
-
-
+###### **Parametros Avanzados > Rendimiento > Servidor multimedia nº 1 > vacío**
