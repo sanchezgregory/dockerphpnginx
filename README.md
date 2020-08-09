@@ -11,8 +11,9 @@
 
 #### **Dentro del directorio donde hayas clonado el docker**
 
-#### Tener Mysql clonado para el enlace con la BD. ` git@github.com:sanchezgregory/mysqldocker.git `
-#### 1. **git clone** *https://gitlab.com/apernet/presta-nginx.git carpta_destino*
+#### **IMPORTANTE** Tener Mysql clonado para el enlace con la BD. `git clone git@github.com:sanchezgregory/mysqldocker.git mysqlDb`
+
+#### 1. **git clone** *git@github.com:sanchezgregory/dockerphpnginx.git carpta_destino*
 
 #### 2. ` cp .env.example .env `
 
