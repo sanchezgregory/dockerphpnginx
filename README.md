@@ -1,20 +1,20 @@
-// Paso a paso  [SEGUIR LA RAMA MASTER]
+# Entornos Locales - Aper
 
-Previo a todo:
 
-instalar docker según -->  https://get.docker.com/
+## Instala Docker
 
-Para ubuntu 18.04 o superior ==> https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04
+### Instalar docker *https://get.docker.com/*
 
-Genérico ==> https://docs.docker.com/compose/install/
+### Instalar docker-compose *https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04*
 
-====================================
+#### Genérico *https://docs.docker.com/compose/install/*  
 
-Dentro del directorio donde hayas clonado el docker:
+#### **Dentro del directorio donde hayas clonado el docker**
 
- 1.- git clone https://gitlab.com/apernet/presta-nginx.git carpta_destino
+#### Tener Mysql clonado para el enlace con la BD. ` git@github.com:sanchezgregory/mysqldocker.git `
+#### 1. **git clone** *https://gitlab.com/apernet/presta-nginx.git carpta_destino*
 
- 2.- cp .env.example .env
+#### 2. ` cp .env.example .env `
 
  3.- Seguir las instrucciones del .env
 
