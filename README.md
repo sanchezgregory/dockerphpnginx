@@ -11,34 +11,43 @@
 
 #### **Dentro del directorio donde hayas clonado el docker**
 
-#### **IMPORTANTE** Tener Mysql clonado para el enlace con la BD. `git clone git@github.com:sanchezgregory/mysqldocker.git mysqlDb`
+#### **IMPORTANTE** 
+
+##### Debe estar en carpetas separadas, tanto el docker mysqldb como cada uno de los dockers dockerphpnginx, pueden estar en el mismo nivel o en otras subcarpetas.
+
+##### Tener Mysql clonado para el enlace con la BD. `git clone git@github.com:sanchezgregory/mysqldocker.git mysqlDb`
+
 
 #### 1. **git clone** *git@github.com:sanchezgregory/dockerphpnginx.git carpta_destino*
 
 #### 2. ` cp .env.example .env `
+##### 2.1 Seguir los pasos de configuración en .env
 
-#### 3. Debes elegir con cual versión de PHP vas a usar (Descomente la linea que desea utilizar)
+#### 3. Debes elegir con cual versión de PHP vas a usar (Descomente la primera linea que desea utilizar en etc/php/Dockerfile)
 #### 3.1  *para prestashop 1.6 utilizar FROM php:7.1.14-fpm*
 #### 3.2  *para prestashop 1.7 utilizar FROM php:7.3.6-fpm*
 
-#### 4.1  docker-compose up --build  levanta el docker y lo construye **se ven los logs siempre**
-#### 4.2  docker-compose up --build -d levanta el docker lo construye **lo deja en segundo plano**
+#### 4.1  `docker-compose up --build`  levanta el docker y lo construye se ven los logs siempre
+#### 4.2  `docker-compose up --build -d`  levanta el docker lo construye lo deja en segundo plano
+
+#### La construcción del docker, lanza muchos warnings, esto es totalmente normal, y el proceso tarda aproximadamente 8 min.
  
 #### 5. Copie el archivo index.php ubicado en etc/php/index.php a la carpeta www creada por el docker, para comprobar que la conexión entre el servicio WEB y el MysqlDB
 #### 5.1. `sudo chown -R $USER. www/` 
-
 #### 5.2. `cp etc/php/index.php www/`
 
 #### 6. https://localhost:"PORT_HTTPS"
 
 #### 6.1 Si observa el mensaje: *Access denied for user 'root'@'172.22.0.3' (using password: YES)*
-##### Falta ejecutar el comando `docker exec -it mysqldb bash  /etc/user.sh`
-##### Asegurese de ver el mensaje: *Connected successfully - OK*
-##### Para finalizar ejecute: `rm www/index.php`
+##### 6.1.a Falta ejecutar el comando `docker exec -it mysqldb bash  /etc/user.sh`
+##### 6.1.b Asegurese de ver el mensaje: *Connected successfully - OK*
+#### 6.2 Para finalizar ejecute: `rm www/index.php`
 
 ### Desde ahora ya puede migrar su proyecto a la carpeta www/
 
 ##### 7. Ahora deberá comprobar que tiene acceso a la BD. Desde mysql-workbench (o cualquiera de su preferencia, siguiendo los pasos del readme.md del docker mysql)
+
+##### 7.1 si ya se tiene el proyecto en alguna otra ubicación (verifique que los archivos ocultos se hayan copiado ), ejecutar `sudo rsync -rtv source_folder/ destination_folder/` ejemplo: `sudo rsync -rtv /home/user/entornos/stores/files/ /home/user/entornos/store_name/www/`
 
 ##### 8. Clone el proyecto completo ya sea individualmente core, overrides, theme, modules, etc  o  simplemente ejecute el rsync.sh (elija la opcion 6.1 o 6.2) 
 
