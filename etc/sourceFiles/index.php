@@ -11,7 +11,9 @@ try {
   
    echo "Connected successfully - OK";
 
-  echo " <H2>Entorno listo para continuar, agrege los archivos del proyecto</H2> ";
+   echo "ENTORNO DE _CONTAINER_STORE_";
+
+   echo " <H2>Entorno listo para continuar, agrege los archivos del proyecto</H2> ";
 
 
 } catch(PDOException $e) {
@@ -20,17 +22,6 @@ try {
   echo "<H2>No hay acceso a la BD, verifique usuario y password</H2>";
 };
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>
-		ENTORNO DE _CONTAINER_STORE_
-	</title>
-</head>
-<body>
-	<H2>_CONTAINER_STORE_ listo solo si la conexión a la DB está OK.</H2>
-</body>
-</html>
 
 <?php
 echo phpinfo();
