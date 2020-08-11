@@ -9,12 +9,13 @@ try {
   // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   
-   echo "Connected successfully - OK";
+   echo "Connected successfully - OK <P>";
 
-   echo "ENTORNO DE _CONTAINER_STORE_";
+   echo "ENTORNO DE <strong> _CONTAINER_STORE_ </strong> <p>";
 
    echo " <H2>Entorno listo para continuar, agrege los archivos del proyecto</H2> ";
 
+    echo phpinfo();
 
 } catch(PDOException $e) {
   echo "Connection failed - Error " . $e->getMessage();
@@ -22,6 +23,3 @@ try {
   echo "<H2>No hay acceso a la BD, verifique usuario y password</H2>";
 };
 ?>
-
-<?php
-echo phpinfo();
