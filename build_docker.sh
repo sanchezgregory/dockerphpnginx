@@ -42,6 +42,8 @@ echo ""
 
   chown -R $USUARIO. www
   cat etc/sourceFiles/index.php >> www/index.php
+  sed -i 's/_CONTAINER_STORE_/'"$STORE"'/g' www/index.php
+
 
 echo "************************************************************************"
 echo "************************************************************************"
@@ -68,11 +70,13 @@ if [[ $CONSTR = "1" ]]; then
 
     chown -R $USUARIO. www
     rm www/index.php
+    docker-compose down
 
     echo "************************************************************************"
     echo "************************************************************************"
 
-    echo " %%%% Exito, empiece a migrar su proyecto al directorio www %%%% "
+    echo " %%%% Exito, empiece a migrar su proyecto al directorio www y  %%%% "
+    echo " %%%% levante el docker nuevamente docker-compose up  %%%% "
     
     echo "************************************************************************"
     echo "************************************************************************"
