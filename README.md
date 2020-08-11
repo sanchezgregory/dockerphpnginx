@@ -1,5 +1,8 @@
-# Entornos Locales - Aper
+## Entornos Locales - Aper
 
+#### 1. **git clone** *git@github.com:sanchezgregory/dockerphpnginx.git carpta_destino*
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 ## Instala Docker
 
@@ -17,8 +20,19 @@
 
 ##### Tener Mysql clonado para el enlace con la BD. `git clone git@github.com:sanchezgregory/mysqldocker.git mysqlDb`
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-#### 1. **git clone** *git@github.com:sanchezgregory/dockerphpnginx.git carpta_destino*
+## Nivel automático.
+
+### 1. Ubicarse dentro del directorio del docker
+
+### 2. ejecutar `chmod +x build_dokcer.sh`
+
+### 3. ejecutar `bash build_docker.sh`
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+## NIVEL MANUAL
 
 #### 2. ` cp .env.example .env `
 ##### 2.1 Seguir los pasos de configuración en .env

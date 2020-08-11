@@ -4,6 +4,8 @@ echo "***********************************************************************"
 echo "Este script no tiene validaciones, procure hacer todo sin errores"
 echo ""
 echo "Si cometió algún error, ejecute: [git reset --hard] y vuelva a empezar"
+echo ""
+echo "Puede cancelar el proceso en cualquier momento con, [ctrl +c] y vuelva a empezar"
 echo "***********************************************************************"
 echo "***********************************************************************"
 echo ""
@@ -23,9 +25,6 @@ echo "4. Para Prestashop 1.6 escriba 1, Prestashop 1.7 escriba 2"
 echo ""
 read VERSION
 echo ""
-
-P16=1
-p17=2
 
   if [[ $VERSION = "1" ]]; then
     cat etc/sourceFiles/Dockerfile71 >> etc/php/Dockerfile
