@@ -38,7 +38,9 @@ p17=2
   sed -i 's/_STORE_NAME_/'"$STORE"'/g' .env
   sed -i 's/_PORT_HTTP_/'"$PORTHTTP"'/g' .env
   sed -i 's/_PORT_HTTPS_/'"$PORTHTTPS"'/g' .env
+  sed -i 's/_PORT_HTTPS_/'"$PORTHTTPS"'/g' etc/nginx/default.conf
   mkdir www/
+
   chown -R $USUARIO. www
   cat etc/sourceFiles/index.php >> www/index.php
 
