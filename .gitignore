@@ -19,3 +19,4 @@ www/
 rsync*
 *.sql
 etc/php/Dockerfile
+valirio/
