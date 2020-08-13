@@ -1,4 +1,4 @@
-FROM nginx:1.16
+FROM nginx:1.17
 
 MAINTAINER Andreas Schlapbach <schlpbch@gmail.com>
 
