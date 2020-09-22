@@ -1,6 +1,6 @@
 ## Entornos Locales - Aper
 
-#### 1. **git clone** *git@github.com:sanchezgregory/dockerphpnginx.git carpta_destino*
+#### 1. **git clone** *https://github.com/sanchezgregory/nginx-proxy-multiple-website.git carpta_destino*
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -18,7 +18,7 @@
 
 ##### Debe estar en carpetas separadas, tanto el docker mysqldb como cada uno de los dockers dockerphpnginx, pueden estar en el mismo nivel o en otras subcarpetas.
 
-##### Tener Mysql clonado para el enlace con la BD. `git clone git@github.com:sanchezgregory/mysqldocker.git mysqlDb`
+##### Tener Mysql clonado para el enlace con la BD. `git clone https://github.com/sanchezgregory/mysqldocker.git mysqlDb`
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -26,7 +26,7 @@
 
 ### 1. Ubicarse dentro del directorio del docker
 
-### 2. ejecutar `chmod +x build_dokcer.sh`
+### 2. ejecutar `chmod +x build_docker.sh`
 
 ### 3. ejecutar `bash build_docker.sh`
 
