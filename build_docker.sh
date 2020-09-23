@@ -28,16 +28,19 @@ echo ""
 
   if [[ $VERSION = "1" ]]; then
     cat etc/sourceFiles/Dockerfile71 >> etc/php/Dockerfile
+    cat etc/sourceFiles/nginx16 >> etc/nginx/default.conf
+    sed -i 's/_PORT_HTTPS_/'"$PORTHTTPS"'/g' etc/nginx/default.conf
   fi
   if [[ $VERSION = "2" ]]; then
     cat etc/sourceFiles/Dockerfile73 >> etc/php/Dockerfile
+    cat etc/sourceFiles/nginx17 >> etc/nginx/default.conf
   fi
 
   cat etc/sourceFiles/.env.example >> .env
   sed -i 's/_STORE_NAME_/'"$STORE"'/g' .env
   sed -i 's/_PORT_HTTP_/'"$PORTHTTP"'/g' .env
   sed -i 's/_PORT_HTTPS_/'"$PORTHTTPS"'/g' .env
-  sed -i 's/_PORT_HTTPS_/'"$PORTHTTPS"'/g' etc/nginx/default.conf
+  
   mkdir www/
 
   chown -R $USUARIO. www
